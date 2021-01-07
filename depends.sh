@@ -63,6 +63,8 @@ PKGS=(
 # Misc
 'xdg-user-dirs'
 'youtube-dl'
+'xorg-xrdb'
+'python-pywal'
 
 )
 
