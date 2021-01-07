@@ -28,6 +28,9 @@ PKGS=(
 'zsh-history-substring-search'
 'zsh-completions'
 
+# Text editor
+'neovim'
+
 # WM
 'i3-gaps'
 'python-i3ipc'
