@@ -54,8 +54,8 @@ PKGS=(
 'qt5-styleplugins'
 
 # File Manager
-'thunar-git'
-'thunar-volman-git'
+'thunar'
+'thunar-volman'
 'thunar-archive-plugin'
 'xarchiver'
 'unzip'
