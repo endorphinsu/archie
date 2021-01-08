@@ -68,6 +68,8 @@ PKGS=(
 'youtube-dl'
 'xorg-xrdb'
 'python-pywal'
+'redshift'
+'udisks2'
 
 )
 
@@ -77,4 +79,9 @@ for PKG in "${PKGS[@]}"; do
 done
 
 chsh -s /bin/zsh
-xdg-user-dirs-update
+xdg-user-dirs-update --force
+echo -e "\nEDITOR=nvim\n\nWINEESYNC=1\nWINEFSYNC=1\n\nQT_AUTO_SCREEN_SCALE_FACTOR=1\nQT_QPA_PLATFORMTHEME=qt5ct" >> /etc/environment
+mkdir ~/.fonts
+#curl -L --progress-bar https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FantasqueSansMono.zip > ~/.fonts/FantasqueSansMono.zip
+#unzip ~/.fonts/FantasqueSansMono.zip
+#unzip in correct dir
