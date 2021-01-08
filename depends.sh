@@ -89,3 +89,4 @@ curl -L --progress-bar https://github.com/ryanoasis/nerd-fonts/releases/download
 unzip -o ~/.fonts/FantasqueSansMono.zip -d ~/.fonts
 rm ~/.fonts/FantasqueSansMono.zip
 rm ~/.fonts/*Compatible.ttf
+fc-cache -f
