@@ -61,6 +61,7 @@ PKGS=(
 'thunar-volman'
 'thunar-archive-plugin'
 'xarchiver'
+'gvfs'
 'unzip'
 
 # Misc
@@ -80,8 +81,11 @@ done
 
 sudo chsh -s /bin/zsh
 xdg-user-dirs-update --force
-echo -e "\nEDITOR=nvim\n\nWINEESYNC=1\nWINEFSYNC=1\n\nQT_AUTO_SCREEN_SCALE_FACTOR=1\nQT_QPA_PLATFORMTHEME=qt5ct" > /etc/environment
-mkdir ~/.fonts
+sudo echo -e "\nEDITOR=nvim\n\nWINEESYNC=1\nWINEFSYNC=1\n\nQT_AUTO_SCREEN_SCALE_FACTOR=1\nQT_QPA_PLATFORMTHEME=qt5ct" > /etc/environment
+
+mkdir ~/.fonts 
+cd ~/.fonts
 curl -L --progress-bar https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FantasqueSansMono.zip > ~/.fonts/FantasqueSansMono.zip
 unzip -o ~/.fonts/FantasqueSansMono.zip -d ~/.fonts
 rm ~/.fonts/FantasqueSansMono.zip
+rm ~/.fonts/*Compatible.ttf
