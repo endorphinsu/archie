@@ -13,6 +13,12 @@ drive=/dev/sda
 
 umount -R /mnt
 
+for number in {1..9}   
+do
+parted $drive -- rm "$drive"$number
+echo "$number"                              
+done                                
+
 parted -s $drive mklabel gpt
 
 parted -s -a optimal $drive -- mkpart ESP fat32 1Mib 512Mib
@@ -35,7 +41,7 @@ timedatectl set-ntp true
 reflector --verbose --latest 200 --sort score --save /etc/pacman.d/mirrorlist
 cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
 
-pacstrap /mnt base base-devel linux linux-firmware grub efibootmgr $ucode
+pacstrap /mnt base base-devel linux linux-firmware dhcpcd grub efibootmgr $ucode
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
@@ -69,7 +75,7 @@ arch-chroot /mnt passwd $myusername
 
 sed -i 's/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g' /mnt/etc/sudeors
 
-echo -e "\nDefaults Insults" >> /mnt/etc/sudoers
+echo -e "\nDefaults insults" >> /mnt/etc/sudoers
 
 # -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ #
 
