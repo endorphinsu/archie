@@ -13,7 +13,7 @@ drive=/dev/sda
 
 umount -R /mnt
 
-parted $drive mklabel gpt
+parted -s $drive mklabel gpt
 
 parted -s -a optimal $drive -- mkpart ESP fat32 1Mib 512Mib
 
