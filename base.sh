@@ -1,22 +1,32 @@
 #!/usr/bin/env bash
 
-# Autologin?
+# Goal: No brainer KISS script
 
 region=Europe
 city=Vilnius
 myusername=Glorious
 myhostname=Archie
 ucode=intel-ucode
+drive=/dev/sda
 
 # -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ #
 
+umount -R /mnt
+
+parted $drive mklabel gpt
+
+parted -s -a optimal $drive -- mkpart ESP fat32 1Mib 512Mib
+
+parted -s -a optimal $drive -- mkpart primary 512MiB 100%
+
 timedatectl set-ntp true
 
-mkfs.f2fs -f /dev/sda2
-mkfs.fat -F 32 /dev/sda1
+mkfs.f2fs -f "$drive"2
+mkfs.fat -F 32 "$drive"1
 
-mount /dev/sda2 /mnt
-mount /dev/sda1 /mnt/boot
+mount "$drive"2 /mnt
+mkdir /mnt/boot
+mount "$drived"1 /mnt/boot
 
 reflector --verbose --latest 200 --sort score --save /etc/pacman.d/mirrorlist
 cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
