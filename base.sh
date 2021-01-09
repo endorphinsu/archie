@@ -19,7 +19,7 @@ parted -s -a optimal $drive -- mkpart ESP fat32 1Mib 512Mib
 
 parted -s -a optimal $drive -- mkpart primary 512MiB 100%
 
-timedatectl set-ntp true
+# -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ #
 
 mkfs.f2fs -f "$drive"2
 mkfs.fat -F 32 "$drive"1
@@ -27,6 +27,10 @@ mkfs.fat -F 32 "$drive"1
 mount "$drive"2 /mnt
 mkdir /mnt/boot
 mount "$drived"1 /mnt/boot
+
+# -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ #
+
+timedatectl set-ntp true
 
 reflector --verbose --latest 200 --sort score --save /etc/pacman.d/mirrorlist
 cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
@@ -56,14 +60,18 @@ echo "127.0.0.1	localhost
 
 sed -i 's/#Color/Color\nILoveCandy/g' /mnt/etc/pacman.conf
 
-sed -i 's/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g' /mnt/etc/sudeors
-
-echo -e "\nDefaults Insults" >> /mnt/etc/sudoers
+# -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ #
 
 arch-chroot /mnt useradd -m -g users -G wheel,storage,power,video,audio,rfkill,input $myusername
 
 arch-chroot /mnt passwd
-arch-chroot /mnt passwd $User
+arch-chroot /mnt passwd $myusername
+
+sed -i 's/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g' /mnt/etc/sudeors
+
+echo -e "\nDefaults Insults" >> /mnt/etc/sudoers
+
+# -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ #
 
 arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 
