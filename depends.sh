@@ -79,6 +79,8 @@ for PKG in "${PKGS[@]}"; do
     paru -S "$PKG" --noconfirm --needed > /dev/null 2>&1
 done
 
+# Install video drivers
+
 sudo chsh -s /bin/zsh
 xdg-user-dirs-update --force
 sudo echo -e "\nEDITOR=nvim\n\nWINEESYNC=1\nWINEFSYNC=1\n\nQT_AUTO_SCREEN_SCALE_FACTOR=1\nQT_QPA_PLATFORMTHEME=qt5ct" > /etc/environment
