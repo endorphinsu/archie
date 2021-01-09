@@ -4,8 +4,8 @@
 
 region=Europe
 city=Vilnius
-myusername=Glorious
-myhostname=Archie
+myusername=you
+myhostname=archie
 ucode=intel-ucode
 drive=/dev/sda
 
@@ -26,7 +26,7 @@ mkfs.fat -F 32 "$drive"1
 
 mount "$drive"2 /mnt
 mkdir /mnt/boot
-mount "$drived"1 /mnt/boot
+mount "$drive"1 /mnt/boot
 
 # -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ #
 
@@ -62,7 +62,7 @@ sed -i 's/#Color/Color\nILoveCandy/g' /mnt/etc/pacman.conf
 
 # -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ #
 
-arch-chroot /mnt useradd -m -g users -G wheel,storage,power,video,audio,rfkill,input $myusername
+arch-chroot /mnt useradd -m -G wheel,storage,power,video,audio,rfkill,input $myusername
 
 arch-chroot /mnt passwd
 arch-chroot /mnt passwd $myusername
