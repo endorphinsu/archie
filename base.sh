@@ -1,12 +1,9 @@
 #!/usr/bin/env bash
 
-# Stupid simple install script
-# Use less arch-chroot /mnt
-# Ask to install dots
-# Autologin
+# Autologin?
 
-region=Antarctica
-city=Troll
+region=Europe
+city=Vilnius
 myusername=Glorious
 myhostname=Archie
 ucode=intel-ucode
