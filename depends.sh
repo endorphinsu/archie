@@ -64,6 +64,7 @@ PKGS=(
 
 # Misc
 'xdg-user-dirs'
+'f2fs-tools'
 'youtube-dl'
 'xorg-xrdb'
 'python-pywal'
