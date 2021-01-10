@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-# Run as user
-# Ask to install a compositor
-# If yes edit script
+# Todo: Install video drivers properly with cases
 
 PKGS=(
 
@@ -95,5 +93,3 @@ unzip -o ~/.fonts/FantasqueSansMono.zip -d ~/.fonts
 rm ~/.fonts/FantasqueSansMono.zip
 rm ~/.fonts/*Compatible.ttf
 fc-cache -f
-
-echo "Install video driverts"
