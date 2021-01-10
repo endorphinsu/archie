@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
 # Goal: No brainer KISS script
+# Todo make this readable to people who don't know bash and any of these commands if possible
+# Add comments
+# Make an interactive script?
 
 region=Europe
 city=Vilnius
@@ -11,12 +14,9 @@ drive=/dev/sda
 
 # -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ #
 
-umount -R /mnt
-
 for number in {1..9}   
 do
-parted $drive -- rm "$drive"$number
-echo "$number"                              
+parted $drive -- rm "$drive"$number                           
 done                                
 
 parted -s $drive mklabel gpt
@@ -47,7 +47,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 arch-chroot /mnt systemctl start dhcpcd
 
-ln -sf /usr/share/zoneinfo/$region/$city /mnt/etc/localtime
+ln -sf /mnt/usr/share/zoneinfo/$region/$city /mnt/etc/localtime
 
 arch-chroot /mnt hwclock --systohc
 
@@ -66,6 +66,8 @@ echo "127.0.0.1	localhost
 
 sed -i 's/#Color/Color\nILoveCandy/g' /mnt/etc/pacman.conf
 
+sed -i '/^#\[multilib\]/{s/^#//;n;s/^#//;n;s/^#//}' /etc/pacman.conf
+
 # -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ #
 
 arch-chroot /mnt useradd -m -G wheel,storage,power,video,audio,rfkill,input $myusername
@@ -80,6 +82,8 @@ echo -e "\nDefaults insults" >> /mnt/etc/sudoers
 # -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ #
 
 arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+
+# Grub timeout and resolution
 
 arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 
