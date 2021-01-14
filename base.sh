@@ -94,7 +94,11 @@ sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=3/g' /mnt/etc/default/grub
 arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB                                                                                                                                             
                                                                                                                                                                                                                                          
 arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg                                                                                                                                                                                    
-                                                                                                                                                                                                                                         
+           
+echo "[Service]
+ExecStart=
+ExecStart=-/usr/bin/agetty --autologin username --noclear %I $TERM" > /etc/systemd/system/getty@tty1.service.d/override.conf
+           
 umount -R /mnt                                                                                                                                                                                                                           
                                                                                                                                                                                                                                          
 reboot       
