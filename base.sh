@@ -97,7 +97,7 @@ arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
            
 echo "[Service]
 ExecStart=
-ExecStart=-/usr/bin/agetty --autologin username --noclear %I $TERM" > /etc/systemd/system/getty@tty1.service.d/override.conf
+ExecStart=-/usr/bin/agetty --autologin username --noclear %I $TERM" > /mnt/etc/systemd/system/getty@tty1.service.d/override.conf
            
 umount -R /mnt                                                                                                                                                                                                                           
                                                                                                                                                                                                                                          
