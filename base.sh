@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+umount -R /mnt
+
 pacman -S dialog > /dev/null 2>&1 &
 
 DIALOG='dialog --cursor-off-label --colors --no-mouse'
