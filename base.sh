@@ -2,7 +2,7 @@
 
 umount -R /mnt
 
-pacman -S dialog --needed > /dev/null 2>&1 &
+pacman -S dialog --needed
 
 DIALOG='dialog --cursor-off-label --colors --no-mouse'
 DIALOGSIZE='0 0'
