@@ -45,9 +45,6 @@ PKGS=(
 'i3lock-color'
 'xautolock'
 
-# Bar
-'polybar'
-
 # Theme
 'lxappearance-gtk3'
 'breeze-snow-cursor-theme'
