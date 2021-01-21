@@ -14,19 +14,22 @@ DRIVES=$(lsblk -rpo "name,type,size,mountpoint" | grep 'disk' | awk '$4==""{prin
 
 DRIVE=$($DIALOG --title 'Choose drive to partition' --menu "" $DIALOGSIZE 0 $DRIVES 2>&1 1>&3)
 
+# Race condition?
 parted -s $DRIVE -- mklabel gpt
-
+sleep 0.5
 parted -s -a optimal "$DRIVE"1 -- mkpart ESP fat32 1Mib 512Mib
-
+sleep 0.5
 parted -s -a optimal "$DRIVE"2 -- mkpart primary 512MiB 100%
+sleep 1
 
 mkfs.f2fs -f $DRIVE
-
+sleep 0.5
 mount "$DRIVE"2 /mnt
-
+sleep 0.5
 mkdir /mnt/boot
-
+sleep 0.5
 mount "$DRIVE"1 /mnt/boot
+sleep 0.5
 
 CPU=$($DIALOG --checklist "Check your cpu microcode:" $DIALOGSIZE 3 intel-ucode "" 1 amd-ucode "" 2 2>&1 1>&3)
 
