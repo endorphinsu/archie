@@ -2,7 +2,7 @@
 
 umount -R /mnt
 
-pacman -S dialog > /dev/null 2>&1 &
+pacman -S dialog --needed > /dev/null 2>&1 &
 
 DIALOG='dialog --cursor-off-label --colors --no-mouse'
 DIALOGSIZE='0 0'
@@ -22,9 +22,9 @@ sleep 0.5
 parted -s -a optimal $DRIVE -- mkpart ESP fat32 1Mib 512Mib
 sleep 0.5
 parted -s -a optimal $DRIVE -- mkpart primary 512MiB 100%
-sleep 1
+sleep 0.5
 
-mkfs.f2fs -f $DRIVE
+mkfs.f2fs -f $DRIVE\2
 sleep 0.5
 mount "$DRIVE"2 /mnt
 sleep 0.5
@@ -39,6 +39,8 @@ reflector --verbose --latest 200 --sort score --save /etc/pacman.d/mirrorlist
 
 clear
 pacstrap /mnt base base-devel linux linux-firmware dhcpcd grub efibootmgr $CPU
+
+sleep 1
 
 USER=$($DIALOG --inputbox 'Enter your username:' $DIALOGSIZE 2>&1 1>&3)
 
