@@ -19,9 +19,9 @@ DRIVE=$($DIALOG --title 'Choose drive to partition' --menu "" $DIALOGSIZE 0 $DRI
 # Race condition?
 parted -s $DRIVE -- mklabel gpt
 sleep 0.5
-parted -s -a optimal "$DRIVE"1 -- mkpart ESP fat32 1Mib 512Mib
+parted -s -a optimal $DRIVE -- mkpart ESP fat32 1Mib 512Mib
 sleep 0.5
-parted -s -a optimal "$DRIVE"2 -- mkpart primary 512MiB 100%
+parted -s -a optimal $DRIVE -- mkpart primary 512MiB 100%
 sleep 1
 
 mkfs.f2fs -f $DRIVE
