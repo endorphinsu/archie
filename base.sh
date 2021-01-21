@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-# UEFI and ethernet systems only
-
-# add ability to load settings from a file
+pacman -S dialog > /dev/null 2>&1 &
 
 DIALOG='dialog --cursor-off-label --colors --no-mouse'
 DIALOGSIZE='0 0'
