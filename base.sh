@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euxo pipefail
+
 umount -R /mnt
 
 pacman -S dialog --needed
