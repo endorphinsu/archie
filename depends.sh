@@ -93,4 +93,7 @@ rm ~/.fonts/FantasqueSansMono.zip
 rm ~/.fonts/*Compatible.ttf
 fc-cache -f
 
-systemctl enable --now --user mpd.service
+systemctl enable --user mpd.service
+systemctl enable --user psd.service
+systemctl enable prelockd.service
+systemctl enable ananicy.service
