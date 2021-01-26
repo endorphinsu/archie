@@ -97,3 +97,4 @@ systemctl enable --user mpd.service
 systemctl enable --user psd.service
 systemctl enable prelockd.service
 systemctl enable ananicy.service
+systemctl enable nohang.service
