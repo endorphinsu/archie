@@ -8,6 +8,8 @@ PKGS=(
 'noto-fonts'
 'noto-fonts-emoji'
 'noto-fonts-cjk'
+'fira-code'
+'fira-sans'
 
 # Xorg
 'xorg-server'
@@ -57,16 +59,15 @@ PKGS=(
 'thunar-archive-plugin'
 'xarchiver'
 'gvfs'
+'gvfs-mtp'
 'unzip'
 
 # Misc
 'xdg-user-dirs'
-'f2fs-tools'
 'youtube-dl'
 'xorg-xrdb'
 'python-pywal'
 'redshift'
-'udisks2'
 
 )
 
