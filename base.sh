@@ -24,7 +24,7 @@ sleep 0.5
 parted -s -a optimal $DRIVE -- mkpart primary 512MiB 100%
 sleep 0.5
 
-mkfs.f2fs -f $DRIVE\2
+mkfs.xfs -f -s size=4096 $DRIVE\2
 sleep 0.5
 mount "$DRIVE"2 /mnt
 sleep 0.5
@@ -38,7 +38,7 @@ CPU=$($DIALOG --checklist "Check your cpu microcode:" $DIALOGSIZE 3 intel-ucode 
 reflector --verbose --latest 200 --sort score --save /etc/pacman.d/mirrorlist
 
 clear
-pacstrap /mnt base base-devel linux linux-firmware dhcpcd grub efibootmgr f2fs-tools $CPU
+pacstrap /mnt base base-devel linux linux-firmware dhcpcd grub efibootmgr xfsprogs $CPU
 
 sleep 1
 
