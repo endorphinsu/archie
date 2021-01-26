@@ -92,3 +92,5 @@ unzip -o ~/.fonts/FantasqueSansMono.zip -d ~/.fonts
 rm ~/.fonts/FantasqueSansMono.zip
 rm ~/.fonts/*Compatible.ttf
 fc-cache -f
+
+systemctl enable --now --user mpd.service
