@@ -42,6 +42,8 @@ PKGS=(
 'rofi'
 'fzf'
 'conky'
+'alsa-utils'
+'mpc'
 
 # Lockscreen
 'i3lock-color'
