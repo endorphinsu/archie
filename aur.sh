@@ -7,4 +7,4 @@ git clone https://aur.archlinux.org/paru-bin.git
 cd paru-bin
 makepkg -sirc
 cd
-rm -r paru-bin
+rm -rf paru-bin
