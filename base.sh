@@ -73,7 +73,7 @@ CITY=$($DIALOG --no-items --title 'Choose your region' --menu "" $DIALOGSIZE 0 $
 ln -sf /mnt/usr/share/zoneinfo/$REGION/$CITY /mnt/etc/localtime
 
 echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
-
+#sed
 arch-chroot /mnt locale-gen
 
 arch-chroot /mnt hwclock --systohc
