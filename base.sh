@@ -2,7 +2,7 @@
 
 set -euxo pipefail
 
-umount -R /mnt
+# unmount if not mounted
 
 pacman -S dialog --needed --noconfirm
 
@@ -28,6 +28,8 @@ sleep 0.5
 
 mkfs.xfs -f -s size=4096 $DRIVE\2
 sleep 0.5
+mkfs.fat -F 32 $DRIVE\2
+sleep 0.5
 mount "$DRIVE"2 /mnt
 sleep 0.5
 mkdir /mnt/boot
@@ -44,11 +46,12 @@ pacstrap /mnt base base-devel linux linux-firmware dhcpcd grub efibootmgr xfspro
 
 sleep 1
 
+# Only lowercase
 USER=$($DIALOG --inputbox 'Enter your username:' $DIALOGSIZE 2>&1 1>&3)
 
 arch-chroot /mnt useradd -m -G wheel,storage,power,video,audio,rfkill,input $USER
 
-sed -i 's/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g' /mnt/etc/sudeors
+sed -i 's/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g' /mnt/etc/sudoers
 
 echo -e "\nDefaults insults" >> /mnt/etc/sudoers
 
