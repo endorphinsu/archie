@@ -8,8 +8,6 @@ PKGS=(
 'noto-fonts'
 'noto-fonts-emoji'
 'noto-fonts-cjk'
-'fira-code'
-'fira-sans'
 
 # Xorg
 'xorg-server'
