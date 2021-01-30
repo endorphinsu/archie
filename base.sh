@@ -28,7 +28,7 @@ sleep 0.5
 
 mkfs.xfs -f -s size=4096 $DRIVE\2
 sleep 0.5
-mkfs.fat -F 32 $DRIVE\2
+mkfs.fat -F 32 $DRIVE\1
 sleep 0.5
 mount "$DRIVE"2 /mnt
 sleep 0.5
