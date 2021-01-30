@@ -41,6 +41,7 @@ PKGS=(
 'dunst'
 'rofi'
 'fzf'
+'conky'
 
 # Lockscreen
 'i3lock-color'
