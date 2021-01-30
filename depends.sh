@@ -69,6 +69,10 @@ PKGS=(
 'xorg-xrdb'
 'python-pywal'
 'redshift'
+'ananicy'
+'profile-sync-daemon'
+'mpd'
+'ncmpcpp'
 
 )
 
