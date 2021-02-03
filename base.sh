@@ -109,10 +109,10 @@ arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 # Ask password
 
 # Create dir/files
-echo "[Service]
-ExecStart=
-ExecStart=-/usr/bin/agetty --autologin username --noclear %I $TERM" > /mnt/etc/systemd/system/getty@tty1.service.d/override.conf
-           
+mkdir -p  /mnt/etc/systemd/system/getty@tty1.service.d/
+echo -e "[Service]\nExecStart=\nExecStart=-/usr/bin/agetty --autologin $USER --noclear %I $TERM" > /mnt/etc/systemd/system/getty@tty1.service.d/override.conf
+
+arch-chroot /mnt systemctl enable getty@
 umount -R /mnt                                                                                                                                                                                                                           
                                                                                                                                                                                                                                          
 reboot       
