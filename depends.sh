@@ -12,6 +12,8 @@ PKGS=(
 # Xorg
 'xorg-server'
 'xorg-xinit'
+'xorg-server-devel'
+'xorg-xrdb'
 
 # Browser
 'firefox'
@@ -38,12 +40,11 @@ PKGS=(
 'xclip'
 'maim'
 'feh'
-'dunst'
 'rofi'
 'fzf'
-'conky'
-'alsa-utils'
 'mpc'
+'mpd'
+'ncmpcpp'
 
 # Lockscreen
 'i3lock-color'
@@ -63,17 +64,18 @@ PKGS=(
 'gvfs'
 'gvfs-mtp'
 'unzip'
+'ffmpegthumbnailer'
+'tumbler'
 
 # Misc
 'xdg-user-dirs'
 'youtube-dl'
-'xorg-xrdb'
+
 'python-pywal'
 'redshift'
 'ananicy'
+'picom'
 'profile-sync-daemon'
-'mpd'
-'ncmpcpp'
 
 )
 
