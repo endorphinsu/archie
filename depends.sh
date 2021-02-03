@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-# Todo: Install video drivers properly with cases
+DIALOG='dialog --cursor-off-label --colors --no-mouse'
+DIALOGSIZE='0 0'
 
 PKGS=(
 
@@ -33,6 +34,7 @@ PKGS=(
 
 # WM
 'i3-gaps'
+'polybar'
 'python-i3ipc'
 'alternating-layouts-git'
 
@@ -83,6 +85,10 @@ for PKG in "${PKGS[@]}"; do
     echo "INSTALLING: ${PKG}"
     paru -S "$PKG" --noconfirm --needed > /dev/null 2>&1
 done
+
+if ($DIALOG --yesno "Install nvidia drivers?" $DIALOGSIZE) then
+paru -S nvidia nvidia-settings nvidia-dkms --noconfirm --needed
+fi
 
 sudo chsh -s /bin/zsh
 
