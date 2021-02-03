@@ -120,6 +120,4 @@ systemctl enable prelockd.service
 systemctl enable ananicy.service
 systemctl enable nohang.service
 
-echo "
-[chaotic-aur]
-Include = /etc/pacman.d/chaotic-mirrorlist" >> /etc/pacman.conf
+echo -e "\n[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist" >> /etc/pacman.conf
