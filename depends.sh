@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+if [ "$(id -u)" != "0" ]; then
+  exec sudo "$0" "$@"
+fi
+
 DIALOG='dialog --cursor-off-label --colors --no-mouse'
 DIALOGSIZE='0 0'
 
@@ -72,12 +76,15 @@ PKGS=(
 # Misc
 'xdg-user-dirs'
 'youtube-dl'
-
 'python-pywal'
 'redshift'
 'ananicy'
 'picom'
 'profile-sync-daemon'
+
+# Mirrorlist
+'chaotic-mirrorlist'
+'chaotic-keyring'
 
 )
 
@@ -97,7 +104,7 @@ xdg-user-dirs-update --force
 rmdir Templates
 rmdir Public
 
-sudo echo -e "\nEDITOR=nvim\n\nWINEESYNC=1\nWINEFSYNC=1\n\nQT_AUTO_SCREEN_SCALE_FACTOR=1\nQT_QPA_PLATFORMTHEME=qt5ct" > /etc/environment
+echo -e "\nEDITOR=nvim\n\nWINEESYNC=1\nWINEFSYNC=1\n\nQT_AUTO_SCREEN_SCALE_FACTOR=1\nQT_QPA_PLATFORMTHEME=qt5ct" > /etc/environment
 
 mkdir ~/.fonts 
 cd ~/.fonts
@@ -112,3 +119,7 @@ systemctl enable --user psd.service
 systemctl enable prelockd.service
 systemctl enable ananicy.service
 systemctl enable nohang.service
+
+echo "
+[chaotic-aur]
+Include = /etc/pacman.d/chaotic-mirrorlist" >> /etc/pacman.conf
