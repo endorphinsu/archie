@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# If command fails = exit
 set -euxo pipefail
 
 # unmount if not mounted
