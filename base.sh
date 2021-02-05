@@ -107,7 +107,6 @@ arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 arch-chroot /mnt passwd
 arch-chroot /mnt passwd $USER
 
-# Create dir/files
 mkdir -p  /mnt/etc/systemd/system/getty@tty1.service.d/
 echo -e "[Service]\nExecStart=\nExecStart=-/usr/bin/agetty --autologin $USER --noclear %I $TERM" > /mnt/etc/systemd/system/getty@tty1.service.d/override.conf
 
