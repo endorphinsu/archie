@@ -3,8 +3,6 @@
 # If command fails = exit
 set -euxo pipefail
 
-# unmount if not mounted
-
 pacman -S dialog --needed --noconfirm
 
 DIALOG='dialog --cursor-off-label --colors --no-mouse'
@@ -74,7 +72,7 @@ CITY=$($DIALOG --no-items --title 'Choose your region' --menu "" $DIALOGSIZE 0 $
 ln -sf /mnt/usr/share/zoneinfo/$REGION/$CITY /mnt/etc/localtime
 
 echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
-#sed
+sed -i 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /mnt/etc/locale.gen
 arch-chroot /mnt locale-gen
 
 arch-chroot /mnt hwclock --systohc
@@ -106,7 +104,8 @@ arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootlo
                                                                                                                                                                                                                                          
 arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg                                                                                                                                                                                    
           
-# Ask password
+arch-chroot /mnt passwd
+arch-chroot /mnt passwd $USER
 
 # Create dir/files
 mkdir -p  /mnt/etc/systemd/system/getty@tty1.service.d/
