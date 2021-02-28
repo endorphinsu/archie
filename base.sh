@@ -15,6 +15,8 @@ exec 3>&1
 
 DRIVES=$(lsblk -rpo "name,type,size,mountpoint" | grep 'disk' | awk '$4==""{printf "%s (%s)\n",$1,$3}')
 
+# Choose, create partitions with tui or give manual partitioning option
+
 DRIVE=$($DIALOG --title 'Choose drive to partition' --menu "" $DIALOGSIZE 0 $DRIVES 2>&1 1>&3)
 
 # Race condition?
