@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+choose networkmanager or dhcpcd
+
 # If command fails = exit
 set -euxo pipefail
 
@@ -41,7 +43,7 @@ CPU=$($DIALOG --checklist "Check your cpu microcode:" $DIALOGSIZE 3 intel-ucode 
 reflector --verbose --latest 200 --sort score --save /etc/pacman.d/mirrorlist
 
 clear
-pacstrap /mnt base base-devel linux linux-firmware dhcpcd grub efibootmgr xfsprogs $CPU
+pacstrap /mnt base base-devel linux linux-firmware dhcpcd grub efibootmgr os-prober xfsprogs $CPU
 
 sleep 1
 
@@ -86,13 +88,28 @@ if ($DIALOG --yesno "Enable pacman eastereggs?" $DIALOGSIZE) then
 sed -i 's/#Color/Color\nILoveCandy/g' /mnt/etc/pacman.conf
 fi
 
+if ($DIALOG --yesno "Install nvidia drivers?" $DIALOGSIZE) then
+pacstrap /mnt nvidia
+fi
+
+INTERNET=$(dialog --cursor-off-label --colors --no-mouse --menu Select: 0 0 0 1 dhcpcd 2 NetworkManager 2>&1 1>&3)
+
+case $INTERNET in
+        1)
+        pacstrap /mnt dhcpcd
+        arch-chroot /mnt systemctl enable dhcpcd
+        ;;
+        2)
+        pacstrap /mnt NetworkManager
+        arch-chroot /mnt systemctl enable NetworkManager
+        ;;
+esac
+
 THREADS=$(nproc)
 
 sed -i 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j'$THREADS'"/g' /mnt/etc/makepkg.conf
 
 genfstab -U /mnt >> /mnt/etc/fstab
-
-arch-chroot /mnt systemctl enable dhcpcd
 
 arch-chroot /mnt systemctl enable fstrim.timer
 
@@ -107,10 +124,6 @@ arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 arch-chroot /mnt passwd
 arch-chroot /mnt passwd $USER
 
-mkdir -p  /mnt/etc/systemd/system/getty@tty1.service.d/
-echo -e "[Service]\nExecStart=\nExecStart=-/usr/bin/agetty --autologin $USER --noclear %I $TERM" > /mnt/etc/systemd/system/getty@tty1.service.d/override.conf
-
-arch-chroot /mnt systemctl enable getty@
 umount -R /mnt                                                                                                                                                                                                                           
                                                                                                                                                                                                                                          
 reboot       
