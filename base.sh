@@ -100,7 +100,7 @@ case $INTERNET in
         arch-chroot /mnt systemctl enable dhcpcd
         ;;
         2)
-        pacstrap /mnt NetworkManager
+        pacstrap /mnt networkmanager
         arch-chroot /mnt systemctl enable NetworkManager
         ;;
 esac
