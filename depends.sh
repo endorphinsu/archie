@@ -37,6 +37,10 @@ PKGS=(
 # Text editor
 'neovim'
 
+# Audio
+'pipewire'
+'pipewire-pulse'
+
 # DE
 #'gnome'
 'gnome-tweaks'
@@ -123,6 +127,8 @@ sudo chsh -s /bin/zsh
 #systemctl enable ananicy.service
 #systemctl enable nohang.service
 systemctl enable gdm
+systemctl enable --user pipewire
+systemctl enable --user pipewire-pulse
 
 echo -e "\n[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist" >> /etc/pacman.conf
 
