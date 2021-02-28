@@ -38,7 +38,7 @@ PKGS=(
 'neovim'
 
 # DE
-'gnome'
+#'gnome'
 'gnome-tweaks'
 'gdm'
 
