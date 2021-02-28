@@ -1,12 +1,5 @@
 #!/usr/bin/env bash
 
-if [ "$(id -u)" != "0" ]; then
-  exec sudo "$0" "$@"
-fi
-
-DIALOG='dialog --cursor-off-label --colors --no-mouse'
-DIALOGSIZE='0 0'
-
 PKGS=(
 
 # Fonts 
@@ -131,5 +124,3 @@ systemctl enable --user pipewire
 systemctl enable --user pipewire-pulse
 
 echo -e "\n[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist" >> /etc/pacman.conf
-
-paru
