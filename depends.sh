@@ -40,6 +40,7 @@ PKGS=(
 # DE
 'gnome'
 'gnome-tweaks'
+'gdm'
 
 # WM
 #'i3-gaps'
@@ -101,10 +102,10 @@ done
 
 sudo chsh -s /bin/zsh
 
-cd
-xdg-user-dirs-update --force
-rmdir Templates
-rmdir Public
+#cd
+#xdg-user-dirs-update --force
+#rmdir Templates
+#rmdir Public
 
 #echo -e "\nEDITOR=nvim\n\nWINEESYNC=1\nWINEFSYNC=1\n\nQT_AUTO_SCREEN_SCALE_FACTOR=1\nQT_QPA_PLATFORMTHEME=qt5ct" > /etc/environment
 
@@ -121,5 +122,8 @@ rmdir Public
 #systemctl enable prelockd.service
 #systemctl enable ananicy.service
 #systemctl enable nohang.service
+systemctl enable gdm
 
 echo -e "\n[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist" >> /etc/pacman.conf
+
+paru
