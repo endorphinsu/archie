@@ -91,7 +91,7 @@ PKGS=(
 'chaotic-keyring'
 
 )
-
+# Will probably ask for password, but you wont see it
 for PKG in "${PKGS[@]}"; do
     echo "INSTALLING: ${PKG}"
     paru -S "$PKG" --noconfirm --needed > /dev/null 2>&1
