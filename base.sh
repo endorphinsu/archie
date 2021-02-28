@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 
-choose networkmanager or dhcpcd
-
 # If command fails = exit
-set -euxo pipefail
+#set -euxo pipefail
 
 pacman -S dialog --needed --noconfirm
 
