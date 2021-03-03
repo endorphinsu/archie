@@ -32,8 +32,8 @@ PKGS=(
 'python-pynvim'
 
 # Audio
-'pipewire'
-'pipewire-pulse'
+'pipewire-common-git'
+'pipewire-common-pulse-git'
 'pavucontrol'
 
 # WM
