@@ -124,7 +124,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt systemctl enable fstrim.timer
 
 sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=3/g' /mnt/etc/default/grub                                                                                                                                                                         
-sed -i 's/quiet/quiet modprobe.blacklist=pcspkr mitigations=off/g' /mnt/etc/default/grub
+sed -i 's/quiet/loglevel=3 quiet vga=current modprobe_blacklist=pcspkr,iTCO_wdt mitigations=off nowatchdog/g' /mnt/etc/default/grub
 sed -i 's/GRUB_GFXMODE=auto/GRUB_GFXMODE=1920x1080x32/g' /mnt/etc/default/grub                                                                                                                                                                                       
                      
 arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB                                                                                                                                             
