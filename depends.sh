@@ -16,6 +16,7 @@ PKGS=(
 
 # Browser
 'firefox'
+'python-pywalfox'
 
 # Terminal
 'kitty'
