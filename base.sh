@@ -53,7 +53,7 @@ CPU=$($DIALOG --checklist "Check your cpu microcode:" $DIALOGSIZE 3 intel-ucode 
 reflector --verbose --latest 200 --sort score --save /etc/pacman.d/mirrorlist
 
 clear
-pacstrap /mnt base base-devel linux linux-firmware dhcpcd grub efibootmgr os-prober xfsprogs $CPU
+pacstrap /mnt base base-devel linux linux-firmware grub efibootmgr os-prober xfsprogs $CPU
 
 sleep 1
 
