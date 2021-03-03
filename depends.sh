@@ -51,6 +51,8 @@ PKGS=(
 'mpc'
 'mpd'
 'ncmpcpp'
+'man'
+'tldr'
 
 # Lockscreen
 'i3lock-color'
