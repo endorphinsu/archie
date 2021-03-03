@@ -3,7 +3,7 @@
 # If command fails = exit
 #set -euxo pipefail
 
-pacman -S dialog --needed --noconfirm
+pacman -Sy dialog --needed --noconfirm
 
 DIALOG='dialog --cursor-off-label --colors --no-mouse'
 DIALOGSIZE='0 0'
