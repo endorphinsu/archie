@@ -110,15 +110,15 @@ fc-cache -f
 
 systemctl enable --user mpd.service
 systemctl enable --user psd.service
-systemctl enable prelockd.service
-systemctl enable ananicy.service
-systemctl enable nohang.service
+sudo systemctl enable prelockd.service
+sudo systemctl enable ananicy.service
+sudo systemctl enable nohang.service
 systemctl enable --user pipewire
 systemctl enable --user pipewire-pulse
 
 echo -e "\n[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist" | sudo tee -a /etc/pacman.conf
 
-echo "#!/usr/bin/env bash\ni3" > ~/.xinitrc
+echo "#!/usr/bin/env bash/ni3" > ~/.xinitrc
 
 mkdir -p ~/Pictures/Wallpapers/
 
@@ -128,6 +128,7 @@ curl https://w.wallhaven.cc/full/rd/wallhaven-rdddvj.jpg --output ~/Pictures/Wal
 
 sudo nvidia-xconfig --metamodes="1920x1080_144 +0+0" --cool-bits=24
 
+# Escape these
 echo -e "Section "InputClass"
         Identifier "My Mouse"
         Driver "libinput"
