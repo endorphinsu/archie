@@ -118,6 +118,6 @@ systemctl enable --user pipewire-pulse
 
 echo -e "\n[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist" | sudo tee -a /etc/pacman.conf
 
-echo "#!/usr/bin/env bash\ni3" >> ~/.xinitrc
+echo "#!/usr/bin/env bash\ni3" > ~/.xinitrc
 
 sudo pacman -Syu
