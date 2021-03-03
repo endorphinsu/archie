@@ -29,10 +29,12 @@ PKGS=(
 
 # Text editor
 'neovim'
+'python-pynvim'
 
 # Audio
 'pipewire'
 'pipewire-pulse'
+'pavucontrol'
 
 # WM
 'i3-gaps'
