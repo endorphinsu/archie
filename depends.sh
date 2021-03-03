@@ -120,4 +120,12 @@ echo -e "\n[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist" | sudo tee
 
 echo "#!/usr/bin/env bash\ni3" > ~/.xinitrc
 
+mkdir -p ~/Pictures/Wallpapers/
+
+curl https://w.wallhaven.cc/full/j3/wallhaven-j3339m.jpg --output ~/Pictures/Wallpapers/YellowMountains.jpg
+curl https://w.wallhaven.cc/full/rd/wallhaven-rdddvj.jpg --output ~/Pictures/Wallpapers/WhiteMountains.jpg
+curl https://w.wallhaven.cc/full/rd/wallhaven-rdddvj.jpg --output ~/Pictures/Wallpapers/OrangeMountains.jpg
+
 sudo pacman -Syu
+
+reboot
