@@ -142,6 +142,8 @@ echo -e "Section "InputClass"
         Option "AccelSpeed" "0"
 EndSection" | sudo tee /etc/X11/xorg.conf.d/50-mouse-acceleration.conf
 
+sudo pywalfox install -g
+
 sudo pacman -Syu
 
 reboot
