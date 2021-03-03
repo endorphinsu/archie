@@ -124,6 +124,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 arch-chroot /mnt systemctl enable fstrim.timer
 
+# Doesn't blacklist modules?
 sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /mnt/etc/default/grub
 sed -i 's/quiet/loglevel=3 quiet vga=current modprobe_blacklist=pcspkr,iTCO_wdt mitigations=off nowatchdog/g' /mnt/etc/default/grub
 sed -i 's/GRUB_GFXMODE=auto/GRUB_GFXMODE=1920x1080x32/g' /mnt/etc/default/grub 
@@ -136,6 +137,8 @@ mkdir -p  /mnt/etc/systemd/system/getty@tty1.service.d/
 echo -e "[Service]\nExecStart=\nExecStart=-/usr/bin/agetty --autologin $USER --noclear %I $TERM" > /mnt/etc/systemd/system/getty@tty1.service.d/override.conf
 
 arch-chroot /mnt systemctl enable getty@
+
+# Weekly reflector
 
 clear
 
