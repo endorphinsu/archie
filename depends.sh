@@ -14,6 +14,12 @@ PKGS=(
 'xorg-server-devel'
 'xorg-xrdb'
 
+# Nvidia
+'nvidia-settings'
+'nvidia-dkms'
+'libvdpau-va-gl'
+'libva-vdpau-driver'
+
 # Browser
 'firefox'
 'python-pywalfox'
@@ -85,6 +91,9 @@ PKGS=(
 'ananicy'
 'picom'
 'profile-sync-daemon'
+'mpv'
+'transmission-gtk'
+'reflector'
 
 # Mirrorlist
 'chaotic-mirrorlist'
@@ -115,11 +124,18 @@ fc-cache -f
 
 systemctl enable --user mpd.service
 systemctl enable --user psd.service
+systemctl enable --user pipewire
+systemctl enable --user pipewire-pulse
+
+sudo sed -i 's/latest 5/latest 100/g' /etc/xdg/reflector/reflector.conf
+sudo sed -i 's/sort age/sort score/g' /etc/xdg/reflector/reflector.conf
+
+sudo systemctl enable reflector.timer
+sudo systemctl enable fstrim.timer
+
 sudo systemctl enable prelockd.service
 sudo systemctl enable ananicy.service
 sudo systemctl enable nohang.service
-systemctl enable --user pipewire
-systemctl enable --user pipewire-pulse
 
 echo -e "\n[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist" | sudo tee -a /etc/pacman.conf
 
@@ -133,13 +149,12 @@ curl https://w.wallhaven.cc/full/rd/wallhaven-rdddvj.jpg --output ~/Pictures/Wal
 
 sudo nvidia-xconfig --metamodes="1920x1080_144 +0+0" --cool-bits=24
 
-# Escape these
-echo -e "Section "InputClass"
-        Identifier "My Mouse"
-        Driver "libinput"
-        MatchIsPointer "yes"
-        Option "AccelProfile" "flat"
-        Option "AccelSpeed" "0"
+echo -e "Section \"InputClass\"
+        Identifier \"My Mouse\"
+        Driver \"libinput\"
+        MatchIsPointer \"yes\"
+        Option \"AccelProfile\" \"flat\"
+        Option \"AccelSpeed" \"0\"
 EndSection" | sudo tee /etc/X11/xorg.conf.d/50-mouse-acceleration.conf
 
 sudo pywalfox install -g
