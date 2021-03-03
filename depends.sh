@@ -128,6 +128,14 @@ curl https://w.wallhaven.cc/full/rd/wallhaven-rdddvj.jpg --output ~/Pictures/Wal
 
 sudo nvidia-xconfig --metamodes="1920x1080_144 +0+0" --cool-bits=24
 
+echo -e "Section "InputClass"
+        Identifier "My Mouse"
+        Driver "libinput"
+        MatchIsPointer "yes"
+        Option "AccelProfile" "flat"
+        Option "AccelSpeed" "0"
+EndSection" | sudo tee /etc/X11/xorg.conf.d/50-mouse-acceleration.conf
+
 sudo pacman -Syu
 
 reboot
