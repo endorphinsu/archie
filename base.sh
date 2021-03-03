@@ -13,30 +13,40 @@ nohup timedatectl set-ntp true > /dev/null 2>&1 &
 # Redirect INPUT to STDOUT
 exec 3>&1
 
-DRIVES=$(lsblk -rpo "name,type,size,mountpoint" | grep 'disk' | awk '$4==""{printf "%s (%s)\n",$1,$3}')
+function partition {  
 
-# Choose, create partitions with tui or give manual partitioning option
+DRIVES=$(lsblk -rpo "name,type,size,mountpoint" | grep 'disk' | awk '$4==""{printf "%s (%s)\n",$1,$3}')  
+                                                                                                
+DRIVE=$($DIALOG --title 'Choose drive to partition' --menu "" $DIALOGSIZE 0 $DRIVES 2>&1 1>&3)  
 
-DRIVE=$($DIALOG --title 'Choose drive to partition' --menu "" $DIALOGSIZE 0 $DRIVES 2>&1 1>&3)
+# cfdisk $DRIVE  
 
-# Race condition?
-parted -s $DRIVE -- mklabel gpt
-sleep 0.5
-parted -s -a optimal $DRIVE -- mkpart ESP fat32 1Mib 512Mib
-sleep 0.5
-parted -s -a optimal $DRIVE -- mkpart primary 512MiB 100%
-sleep 0.5
+PARTITIONS=$(lsblk /dev/sda -rpo "name,type,size" | grep part | awk '$4==""{printf "%s (%s)\n",$1,$3}')  
 
-mkfs.xfs -f -s size=4096 $DRIVE\2
-sleep 0.5
-mkfs.fat -F 32 $DRIVE\1
-sleep 0.5
-mount "$DRIVE"2 /mnt
-sleep 0.5
+BOOT=$($DIALOG --title 'Choose boot partition' --menu "" $DIALOGSIZE 0 $PARTITIONS 2>&1 1>&3)  
+
+PARTITIONS=$(lsblk /dev/sda -rpo "name,type,size" | grep part | awk '$4==""{printf "%s (%s)\n",$1,$3}')  
+
+ROOT=$($DIALOG --title 'Choose root partition' --menu "" $DIALOGSIZE 0 $PARTITIONS 2>&1 1>&3)
+  
+}  
+  
+partition  
+  
+if ( ! $DIALOG --yesno "Confirm?\n\nROOT: $(lsblk /dev/sda -rpo "name,type,size" | grep part | awk '$4==""{printf "%s (%s)\n",$1,$3}' | grep $ROOT)\nBOOT: $(lsblk /dev/sda -rpo "name,type,size" | grep part | awk '$4==""{printf "%s (%s)\n",$1,$3}' | grep $BOOT)" $DIALOGSIZE) then        
+partition  
+fi  
+  
+if ($DIALOG --yesno "Format the partitions?" $DIALOGSIZE) then  
+mkfs.fat -F32 $BOOT  
+mkfs.xfs -f -s size=4096 $ROOT   
+fi
+
+# Home Partition?
+
+mount $ROOT /mnt    
 mkdir /mnt/boot
-sleep 0.5
-mount "$DRIVE"1 /mnt/boot
-sleep 0.5
+mount $BOOT /mnt/boot
 
 CPU=$($DIALOG --checklist "Check your cpu microcode:" $DIALOGSIZE 3 intel-ucode "" 1 amd-ucode "" 2 2>&1 1>&3)
 
