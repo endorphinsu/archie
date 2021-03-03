@@ -122,8 +122,6 @@ sed -i 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j'$THREADS'"/g' /mnt/etc/makepkg.conf
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
-arch-chroot /mnt systemctl enable fstrim.timer
-
 # Doesn't blacklist modules?
 sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /mnt/etc/default/grub
 sed -i 's/quiet/loglevel=3 quiet vga=current modprobe_blacklist=pcspkr,iTCO_wdt mitigations=off nowatchdog/g' /mnt/etc/default/grub
