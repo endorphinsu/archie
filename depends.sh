@@ -126,6 +126,8 @@ curl https://w.wallhaven.cc/full/j3/wallhaven-j3339m.jpg --output ~/Pictures/Wal
 curl https://w.wallhaven.cc/full/rd/wallhaven-rdddvj.jpg --output ~/Pictures/Wallpapers/WhiteMountains.jpg
 curl https://w.wallhaven.cc/full/rd/wallhaven-rdddvj.jpg --output ~/Pictures/Wallpapers/OrangeMountains.jpg
 
+sudo nvidia-xconfig --metamodes="1920x1080_144 +0+0" --cool-bits=24
+
 sudo pacman -Syu
 
 reboot
