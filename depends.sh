@@ -66,11 +66,12 @@ PKGS=(
 'xautolock'
 
 # Theme
-'papirus-icon-theme'
 'lxappearance-gtk3'
 'breeze-snow-cursor-theme'
 'qt5ct'
 'qt5-styleplugins'
+'themix-icons-papirus-git'
+'themix-theme-oomox-git'
 
 # File Manager
 'thunar'
