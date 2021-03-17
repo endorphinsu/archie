@@ -21,11 +21,11 @@ DRIVE=$($DIALOG --title 'Choose drive to partition' --menu "" $DIALOGSIZE 0 $DRI
 
 cfdisk $DRIVE  
 
-PARTITIONS=$(lsblk /dev/sda -rpo "name,type,size" | grep part | awk '$4==""{printf "%s (%s)\n",$1,$3}')  
+PARTITIONS=$(lsblk $DRIVE -rpo "name,type,size" | grep part | awk '$4==""{printf "%s (%s)\n",$1,$3}')  
 
 BOOT=$($DIALOG --title 'Choose boot partition' --menu "" $DIALOGSIZE 0 $PARTITIONS 2>&1 1>&3)  
 
-PARTITIONS=$(lsblk /dev/sda -rpo "name,type,size" | grep part | awk '$4==""{printf "%s (%s)\n",$1,$3}')  
+PARTITIONS=$(lsblk $DRIVE -rpo "name,type,size" | grep part | awk '$4==""{printf "%s (%s)\n",$1,$3}')  
 
 ROOT=$($DIALOG --title 'Choose root partition' --menu "" $DIALOGSIZE 0 $PARTITIONS 2>&1 1>&3)
   
@@ -33,7 +33,7 @@ ROOT=$($DIALOG --title 'Choose root partition' --menu "" $DIALOGSIZE 0 $PARTITIO
   
 partition  
   
-if ( ! $DIALOG --yesno "Confirm?\n\nROOT: $(lsblk /dev/sda -rpo "name,type,size" | grep part | awk '$4==""{printf "%s (%s)\n",$1,$3}' | grep $ROOT)\nBOOT: $(lsblk /dev/sda -rpo "name,type,size" | grep part | awk '$4==""{printf "%s (%s)\n",$1,$3}' | grep $BOOT)" $DIALOGSIZE) then        
+if ( ! $DIALOG --yesno "Confirm?\n\nROOT: $(lsblk $DRIVE -rpo "name,type,size" | grep part | awk '$4==""{printf "%s (%s)\n",$1,$3}' | grep $ROOT)\nBOOT: $(lsblk $DRIVE -rpo "name,type,size" | grep part | awk '$4==""{printf "%s (%s)\n",$1,$3}' | grep $BOOT)" $DIALOGSIZE) then        
 partition  
 fi  
   
