@@ -90,14 +90,14 @@ arch-chroot /mnt locale-gen
 arch-chroot /mnt hwclock --systohc
 
 
-if ($DIALOG --yesno "Enable multilib?" $DIALOGSIZE) then
+#if ($DIALOG --yesno "Enable multilib?" $DIALOGSIZE) then
 sed -i '/^#\[multilib\]/{s/^#//;n;s/^#//;n;s/^#//}' /mnt/etc/pacman.conf
 arch-chroot /mnt pacman -Sy
-fi
+#fi
 
-if ($DIALOG --yesno "Enable pacman eastereggs?" $DIALOGSIZE) then
+#if ($DIALOG --yesno "Enable pacman eastereggs?" $DIALOGSIZE) then
 sed -i 's/#Color/Color\nILoveCandy/g' /mnt/etc/pacman.conf
-fi
+#fi
 
 if ($DIALOG --yesno "Install nvidia drivers?" $DIALOGSIZE) then
 pacstrap /mnt nvidia
