@@ -3,6 +3,8 @@
 # If command fails = exit
 #set -euxo pipefail
 
+# Todo: don't assume uefi
+
 pacman -Sy dialog --needed --noconfirm
 
 DIALOG='dialog --cursor-off-label --colors --no-mouse'
