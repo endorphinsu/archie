@@ -140,7 +140,7 @@ sudo systemctl enable nohang.service
 
 echo -e "\n[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist" | sudo tee -a /etc/pacman.conf
 
-echo "#!/usr/bin/env bash/ni3" > ~/.xinitrc
+echo "#!/usr/bin/env bash\ni3" > ~/.xinitrc
 
 mkdir -p ~/Pictures/Wallpapers/
 
