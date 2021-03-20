@@ -162,7 +162,8 @@ EndSection" | sudo tee /etc/X11/xorg.conf.d/50-mouse-acceleration.conf
 # firefox
 # echo 'user_pref("gfx.webrender.all", true);
 # user_pref("browser.toolbars.bookmarks.showOtherBookmarks", false);
-# user_pref("browser.toolbars.bookmarks.visibility", "never");' >> ~/.mozilla/firefox/*.default-release/prefs.js
+# user_pref("browser.toolbars.bookmarks.visibility", "never");
+# user_pref("layers.acceleration.force-enabled", true);' >> ~/.mozilla/firefox/*.default-release/prefs.js
  
 
 sudo mkdir -p /etc/udev/rules.d/
