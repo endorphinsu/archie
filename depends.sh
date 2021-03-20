@@ -4,7 +4,8 @@ clear
 
 PKGS=(
 
-# Fonts 
+# Fonts
+'noto-fonts'
 'noto-fonts-emoji'
 'noto-fonts-cjk'
 'ttf-liberation'
