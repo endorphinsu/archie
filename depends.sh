@@ -160,6 +160,27 @@ EndSection" | sudo tee /etc/X11/xorg.conf.d/50-mouse-acceleration.conf
 # firefox
 # echo 'user_pref("gfx.webrender.all", true);' >> ~/.mozilla/firefox/*.default-release/prefs.js
 
+sudo mkdir -p /etc/udev/rules.d/
+sudo touch /etc/udev/rules.d/60-ioschedulers.rules
+
+echo 'ACTION=="add|change", KERNEL=="nvme[0-9]n[0-9]", ATTR{queue/scheduler}="none"' | sudo tee /etc/udev/rules.d/60-ioschedulers.rules
+echo 'ACTION=="add|change", KERNEL=="sd[a-z]|mmcblk[0-9]*", ATTR{queue/rotational}=="0", ATTR{queue/scheduler}="mq-deadline"' | sudo tee -a /etc/udev/rules.d/60-ioschedulers.rules
+echo 'ACTION=="add|change", KERNEL=="sd[a-z]", ATTR{queue/rotational}=="1", ATTR{queue/scheduler}="bfq"' | sudo tee -a /etc/udev/rules.d/60-ioschedulers.rules
+
+sudo mkdir -p /etc/sysctl.d/
+sudo touch /etc/sysctl.d/99-tweaks.conf
+
+echo 'vm.swappiness=10' | sudo tee /etc/sysctl.d/99-tweaks.conf
+echo 'kernel.nmi_watchdog=0' | sudo tee -a /etc/sysctl.d/99-tweaks.conf
+echo 'vm.vfs_cache_pressure=75' | sudo tee -a /etc/sysctl.d/99-tweaks.conf
+echo 'vm.dirty_ratio=10' | sudo tee -a /etc/sysctl.d/99-tweaks.conf
+echo 'vm.dirty_background_ratio=5' | sudo tee -a /etc/sysctl.d/99-tweaks.conf
+echo 'vm.dirty_expire_centisecs=3000' | sudo tee -a /etc/sysctl.d/99-tweaks.conf
+echo 'vm.dirty_writeback_centisecs=1500' | sudo tee -a /etc/sysctl.d/99-tweaks.conf
+echo 'kernel.unprivileged_userns_clone=1' | sudo tee -a /etc/sysctl.d/99-tweaks.conf
+echo 'net.ipv4.tcp_fastopen=3' | sudo tee -a /etc/sysctl.d/99-tweaks.conf
+echo 'kernel.printk = 3 3 3 3' | sudo tee -a /etc/sysctl.d/99-tweaks.conf
+
 sudo pywalfox install -g
 
 rm ~/.bash*
