@@ -158,6 +158,9 @@ echo -e "Section \"InputClass\"
         Option \"AccelSpeed\" \"0\"
 EndSection" | sudo tee /etc/X11/xorg.conf.d/50-mouse-acceleration.conf
 
+# firefox
+# echo 'user_pref("gfx.webrender.all", true);' >> ~/.mozilla/firefox/*.default-release/prefs.js
+
 sudo pywalfox install -g
 
 sudo pacman -Syu
