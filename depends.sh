@@ -134,7 +134,6 @@ sudo sed -i 's/sort age/sort score/g' /etc/xdg/reflector/reflector.conf
 
 sudo systemctl enable reflector.timer
 sudo systemctl enable fstrim.timer
-
 sudo systemctl enable ananicy.service
 sudo systemctl enable nohang.service
 
@@ -162,6 +161,8 @@ EndSection" | sudo tee /etc/X11/xorg.conf.d/50-mouse-acceleration.conf
 # echo 'user_pref("gfx.webrender.all", true);' >> ~/.mozilla/firefox/*.default-release/prefs.js
 
 sudo pywalfox install -g
+
+rm ~/.bash*
 
 sudo pacman -Syu
 
