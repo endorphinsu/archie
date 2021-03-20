@@ -202,7 +202,9 @@ gtk-xft-antialias=1
 gtk-xft-hinting=1
 gtk-xft-hintstyle=hintmedium' > ~/.config/gtk-3.0/settings.ini
 
-# Dots here
+git clone https://github.com/endorphinsu/dotfiles
+
+mv -r dotfiles/* ~/
 
 chmod u+x -R ~/.config/scripts/
 
