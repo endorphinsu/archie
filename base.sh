@@ -142,6 +142,8 @@ arch-chroot /mnt systemctl enable getty@
 
 clear
 
+# Show dialog and stars when writing password
+
 arch-chroot /mnt passwd
 arch-chroot /mnt passwd $USER
 
