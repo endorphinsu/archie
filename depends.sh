@@ -135,7 +135,6 @@ sudo sed -i 's/sort age/sort score/g' /etc/xdg/reflector/reflector.conf
 sudo systemctl enable reflector.timer
 sudo systemctl enable fstrim.timer
 
-sudo systemctl enable prelockd.service
 sudo systemctl enable ananicy.service
 sudo systemctl enable nohang.service
 
@@ -156,7 +155,7 @@ echo -e "Section \"InputClass\"
         Driver \"libinput\"
         MatchIsPointer \"yes\"
         Option \"AccelProfile\" \"flat\"
-        Option \"AccelSpeed" \"0\"
+        Option \"AccelSpeed\" \"0\"
 EndSection" | sudo tee /etc/X11/xorg.conf.d/50-mouse-acceleration.conf
 
 sudo pywalfox install -g
