@@ -61,6 +61,7 @@ PKGS=(
 'ncmpcpp'
 'man'
 'tldr'
+'polkit-gnome'
 
 # Lockscreen
 'i3lock-color'
