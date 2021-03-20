@@ -3,7 +3,6 @@
 PKGS=(
 
 # Fonts 
-'noto-fonts'
 'noto-fonts-emoji'
 'noto-fonts-cjk'
 'ttf-liberation'
@@ -39,8 +38,8 @@ PKGS=(
 'python-pynvim'
 
 # Audio
-'pipewire-common-git'
-'pipewire-common-pulse-git'
+'pipewire'
+'pipewire-pulse'
 'pavucontrol'
 
 # WM
