@@ -3,8 +3,6 @@
 # If command fails = exit
 #set -euxo pipefail
 
-# Todo: don't assume uefi
-
 pacman -Sy dialog --needed --noconfirm
 
 DIALOG='dialog --cursor-off-label --colors --no-mouse'
@@ -41,7 +39,7 @@ fi
   
 if ($DIALOG --yesno "Format the partitions?" $DIALOGSIZE) then  
 mkfs.fat -F32 $BOOT  
-mkfs.xfs -f -s size=4096 $ROOT   
+mkfs.f2fs -f $ROOT   
 fi
 
 # Home Partition?
@@ -53,9 +51,10 @@ mount $BOOT /mnt/boot
 CPU=$($DIALOG --checklist "Check your cpu microcode:" $DIALOGSIZE 3 intel-ucode "" 1 amd-ucode "" 2 2>&1 1>&3)
 
 reflector --verbose --latest 200 --sort score --save /etc/pacman.d/mirrorlist
+cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
 
 clear
-pacstrap /mnt base base-devel linux linux-firmware grub efibootmgr os-prober xfsprogs $CPU
+pacstrap /mnt base base-devel linux linux-firmware efibootmgr $CPU
 
 sleep 1
 
@@ -102,7 +101,7 @@ sed -i 's/#Color/Color\nILoveCandy/g' /mnt/etc/pacman.conf
 #fi
 
 if ($DIALOG --yesno "Install nvidia drivers?" $DIALOGSIZE) then
-pacstrap /mnt nvidia
+pacstrap /mnt nvidia nvidia-settings
 fi
 
 INTERNET=$(dialog --cursor-off-label --colors --no-mouse --menu Select: 0 0 0 1 dhcpcd 2 NetworkManager 2>&1 1>&3)
@@ -124,21 +123,14 @@ sed -i 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j'$THREADS'"/g' /mnt/etc/makepkg.conf
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
-# Doesn't blacklist modules?
-sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /mnt/etc/default/grub
-sed -i 's/quiet/loglevel=3 quiet vga=current modprobe.blacklist=pcspkr mitigations=off nowatchdog/g' /mnt/etc/default/grub
-sed -i 's/GRUB_GFXMODE=auto/GRUB_GFXMODE=1920x1080x32/g' /mnt/etc/default/grub 
 
-arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
-
-arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 
 mkdir -p  /mnt/etc/systemd/system/getty@tty1.service.d/
 echo -e "[Service]\nExecStart=\nExecStart=-/usr/bin/agetty --autologin $USER --noclear %I $TERM" > /mnt/etc/systemd/system/getty@tty1.service.d/override.conf
 
 arch-chroot /mnt systemctl enable getty@
 
-# Weekly reflector
+// todo systemd-boot
 
 clear
 
